@@ -1,0 +1,22 @@
+
+server:
+  port: 8083
+
+#configure routes
+spring:
+  application:
+    name: API_GATEWAY
+  cloud:
+    gateway:
+      routes:
+        - id: QUIZ-SERVICE
+          uri: lb://QUIZ-SERVICE #lb-for load balancing
+          predicates:
+            -  Path= /quiz/**   # can add multiple predicates
+        - id: QUESTION-SERVICE
+          uri: lb://QUESTION-SERVICE
+          predicates:
+            - Path=/question/**
+
+
+
